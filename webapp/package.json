@@ -21,7 +21,9 @@
     "i18n-extract:check": "npm run i18n-extract:check --workspaces --if-present",
     "clean": "npm run clean --workspaces --if-present && rm -rf node_modules .parcel-cache",
     "gen-lang-imports": "node scripts/gen_lang_imports.mjs",
-    "check-external-links": "node scripts/check-external-links.mjs"
+    "check-external-links": "node scripts/check-external-links.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mattermost/compass-icons": "0.1.63",
@@ -36,6 +38,12 @@
     "@babel/preset-react": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@formatjs/cli": "6.7.4",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-links": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-webpack5": "^8.4.7",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -51,6 +59,7 @@
     "patch-package": "8.0.1",
     "sass": "1.80.5",
     "sass-loader": "16.0.2",
+    "storybook": "^8.4.7",
     "strip-ansi": "7.1.0",
     "style-loader": "4.0.0",
     "webpack": "5.106.2",
