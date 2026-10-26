@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../channels/src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
@@ -18,7 +19,6 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
   },
   webpackFinal: async (config) => {
-    // Ensure TypeScript and JSX are handled
     config.module?.rules?.push({
       test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
@@ -36,11 +36,22 @@ const config: StorybookConfig = {
       ],
     });
 
-    // SCSS support
     config.module?.rules?.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
     });
+
+    // Mattermost path aliases
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      utils: path.resolve(__dirname, '../channels/src/utils'),
+      components: path.resolve(__dirname, '../channels/src/components'),
+      stores: path.resolve(__dirname, '../channels/src/stores'),
+      actions: path.resolve(__dirname, '../channels/src/actions'),
+      'mattermost-redux': path.resolve(__dirname, '../platform/mattermost-redux'),
+    };
+    config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx', '.js', '.jsx'];
 
     return config;
   },
